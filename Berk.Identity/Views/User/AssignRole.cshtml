@@ -1,0 +1,38 @@
+﻿@model RoleAssignSendModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="AssignRole" method="post" class="p-4 w-75 mx-auto">
+
+	<input type="hidden" asp-for="@Model.UserId" />
+
+	<div class="list-group">
+
+		@for (int i = 0; i < Model.Roles.Count; i++) //birden fazla durumum var.Name ve value durumlarını ele almam lazım
+		{
+			<input type="hidden" asp-for="@Model.Roles[i].Name" /> //hiddenle bu veriyi sakla
+	        <input type="hidden" asp-for="@Model.Roles[i].RoleId" value="" />
+
+		<label class="list-group-item">
+			<input class="form-check-input me-1" asp-for="@Model.Roles[i].Exist" >
+			@Model.Roles[i].Name
+		</label>
+		}
+		
+		
+	</div>
+
+
+
+	<div class="mb-3">
+		<button type="submit" class="btn btn-primary">Kaydet</button>
+	</div>
+
+	<div class="text-danger mt-2" asp-validation-summary="ModelOnly">
+		@*sadece modeldeki hatalar burada gözüksün*@
+
+	</div>
+
+
+</form>
